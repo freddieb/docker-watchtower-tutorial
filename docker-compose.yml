@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  api:
+    image: index.docker.io/freddieb/example-api:latest
+    restart: unless-stopped
+    ports:
+    - "80:3000"
+
+  # Watches the docker registry for updates on the containers
+  # Must run docker login initially on host machine
+  watchtower:
+    image: containrrr/watchtower
+    restart: unless-stopped
+    volumes:
+      # Allows container to interact with Docker API
+      - /var/run/docker.sock:/var/run/docker.sock
+      # Docker (registry) login credentials
+      # - $HOME/.docker/config.json:/config.json
+    # Check for new images every 90 seconds
+    command: --interval 90 
