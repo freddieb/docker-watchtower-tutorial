@@ -21,4 +21,4 @@ COPY --from=dependencies /usr/src/app/package.json ./
 RUN npm install --only=production
 COPY --from=build /usr/src/app ./
 EXPOSE 3000
-CMD ["node", "index.js"]
+CMD ["node", "server.js"]
